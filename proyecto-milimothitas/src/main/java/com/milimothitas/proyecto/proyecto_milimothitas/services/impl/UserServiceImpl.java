@@ -58,7 +58,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserResponse> getByName(String name) {
-        return null;
+        return userRepository.findByNameIgnoringCaseContains(name).stream()
+       .map(this::toResponse).toList();
     }
 
     @Override
