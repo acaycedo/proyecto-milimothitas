@@ -13,8 +13,8 @@ public interface UserService {
     //metodo para obtener un usuario por su id
     UserResponse getById(Long id);
     //metodo para obtener un usuario por su categoria
-    List<UserResponse> getByName(String name);
-    //metodo para crear un usuario
+    List<UserResponse> getByName(String name); 
+   //metodo para crear un usuario
     UserResponse create(UserRequest user);
     //metodo para actualizar un usuario
     UserResponse update(Long id, UserRequest user);
