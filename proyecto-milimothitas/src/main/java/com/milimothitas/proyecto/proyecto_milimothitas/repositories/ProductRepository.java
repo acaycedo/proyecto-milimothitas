@@ -10,5 +10,5 @@ import com.milimothitas.proyecto.proyecto_milimothitas.model.entities.Product;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     //control de busqueda por nombre de productos para no tener que hacer Querys complejas con mucho codigo
     //Lo malo que Java tiene limitacion de caracteres por metodo asi que si es necesario si hay que implememtar query
-    List<Product> findByNameIgnoringCaseContains(String name);
+    List<Product> findByCodeIgnoringCaseContains(String code);
 }
