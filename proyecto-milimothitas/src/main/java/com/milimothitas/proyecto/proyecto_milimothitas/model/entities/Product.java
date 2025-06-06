@@ -20,11 +20,11 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "code", nullable = false)
-    private String name;
+    @Column(name = "code", nullable = false, unique = true)
+    private String code;
     @Column(name = "description", nullable = false)
     private String description;
-    @Column(name = "categoria", nullable = false, unique = true)
+    @Column(name = "categoria", nullable = false)
     private String category;
 
     @Column(name = "price", nullable = false)

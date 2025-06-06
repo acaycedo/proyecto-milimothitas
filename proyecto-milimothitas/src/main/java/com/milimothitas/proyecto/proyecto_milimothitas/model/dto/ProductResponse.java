@@ -9,8 +9,8 @@ public class ProductResponse {
     @Schema(description = "Identificador único del producto", example = "1", required = true)
     private Long id;
 
-    @Schema(description = "Nombre del producto", example = "Termo", required = true)
-    private String name;
+    @Schema(description = "Codigo del producto", example = "Termo", required = true)
+    private String code;
 
     @Schema(description = "Descripción del producto", example = "Termo Stanley", required = true)
     private String description;
@@ -18,12 +18,12 @@ public class ProductResponse {
     @Schema(description = "Categoría del producto", example = "Termos y vasos", required = true)
     private String category;
 
-    @Schema(description = "Precio unitario del producto", example = "$12.000", required = true, minimum = "0")
+    @Schema(description = "Precio unitario del producto", example = "12000", required = true, minimum = "0")
     private Double price;
 
     @Schema(description = "Cantidad disponible en inventario", example = "50", required = true, minimum = "0")
     private Integer stock;
 
-    @Schema(description = "Estado del producto (activo/inactivo)", example = "true", required = true)
+    @Schema(description = "Estado del producto (activo/inactivo)", example = "true", required = false)
     private boolean state;
 } 

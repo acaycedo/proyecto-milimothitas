@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.milimothitas.proyecto.proyecto_milimothitas.exceptions.ProductNotFoundException;
-import com.milimothitas.proyecto.proyecto_milimothitas.model.dto.ProductoRequest;
+import com.milimothitas.proyecto.proyecto_milimothitas.model.dto.ProductRequest;
 import com.milimothitas.proyecto.proyecto_milimothitas.model.dto.ProductResponse;
 import com.milimothitas.proyecto.proyecto_milimothitas.model.entities.Product;
 import com.milimothitas.proyecto.proyecto_milimothitas.repositories.ProductRepository;
@@ -34,21 +34,21 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductResponse> getByName(String name) {
-        return productRepository.findByNameIgnoringCaseContains(name).stream()
+    public List<ProductResponse> getByCode(String code) {
+        return productRepository.findByCodeIgnoringCaseContains(code).stream()
                 .map(this::toResponse)
                 .toList();
     }
 
     @Override
-    public ProductResponse create(ProductoRequest product) {
+    public ProductResponse create(ProductRequest product) {
         var entity = toEntity(product);
         var newProduct = productRepository.save(entity);
         return toResponse(newProduct);
     }
 
     @Override
-    public ProductResponse update(Long id, ProductoRequest product) {
+    public ProductResponse update(Long id, ProductRequest product) {
         //Se usa un Optional para verificar si el producto que se encontro por id existe y si no retornamos una exception de
         //si no esta presente el objeto retorne el mensaje
         var entityOptional = productRepository.findById(id);
@@ -71,7 +71,7 @@ public class ProductServiceImpl implements ProductService {
     private ProductResponse toResponse(Product product) {
         var response = new ProductResponse();
         response.setId(product.getId());
-        response.setName(product.getName());
+        response.setCode(product.getCode());
         response.setDescription(product.getDescription());
         response.setCategory(product.getCategory());
         response.setPrice(product.getPrice());
@@ -81,9 +81,9 @@ public class ProductServiceImpl implements ProductService {
     }
     //metodo refactorizado para no tener que repetir esta misma linea en cada metodo y asi ahorrarnos
     //el tema de estar seteando los objetos del Request
-    private Product toEntity(ProductoRequest product) {
+    private Product toEntity(ProductRequest product) {
         var entity = new Product();
-        entity.setName(product.getName());
+        entity.setCode(product.getCode());
         entity.setDescription(product.getDescription());
         entity.setCategory(product.getCategory());
         entity.setPrice(product.getPrice());

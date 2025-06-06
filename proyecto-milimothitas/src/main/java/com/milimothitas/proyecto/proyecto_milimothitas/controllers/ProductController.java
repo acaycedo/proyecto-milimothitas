@@ -30,7 +30,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
-import com.milimothitas.proyecto.proyecto_milimothitas.model.dto.ProductoRequest;
+import com.milimothitas.proyecto.proyecto_milimothitas.model.dto.ProductRequest;
 import com.milimothitas.proyecto.proyecto_milimothitas.model.dto.ProductResponse;
 
 @Tag(name = "Productos", description = "EndPoint para gestionar los productos de Milimothitas")
@@ -67,9 +67,9 @@ public class ProductController {
             @ApiResponse(responseCode = "400", description = "Parámetro 'nombre' vacío o inválido", content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class)))
     })
     @GetMapping("search")
-    public List<ProductResponse> getProductsByName(
-            @Parameter(description = "Nombre o parte del nombre del producto a buscar", required = true, example = "Termo") @Valid @NotBlank @RequestParam("nombre") String name) {
-        return productService.getByName(name);
+    public List<ProductResponse> getProductsByCode(
+            @Parameter(description = "Nombre o parte del nombre del producto a buscar", required = true, example = "Termo") @Valid @NotBlank @RequestParam("codigo") String code) {
+        return productService.getByCode(code);
     }
 
     @Operation(summary = "Crear un nuevo producto", description = "Crea un nuevo producto en el sistema")
@@ -80,7 +80,7 @@ public class ProductController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ProductResponse createProduct(
-            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del producto a crear", required = true, content = @Content(schema = @Schema(implementation = ProductoRequest.class))) @Valid @RequestBody ProductoRequest product) {
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del producto a crear", required = true, content = @Content(schema = @Schema(implementation = ProductRequest.class))) @Valid @RequestBody ProductRequest product) {
         return productService.create(product);
     }
 
@@ -93,7 +93,7 @@ public class ProductController {
     @PutMapping("{id}")
     public ProductResponse updateProduct(
             @Parameter(description = "ID del producto a actualizar", required = true, example = "1") @Valid @Min(1) @PathVariable("id") Long id,
-            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Nuevos datos del producto", required = true, content = @Content(schema = @Schema(implementation = ProductoRequest.class))) @RequestBody ProductoRequest product) {
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Nuevos datos del producto", required = true, content = @Content(schema = @Schema(implementation = ProductRequest.class))) @RequestBody ProductRequest product) {
         return productService.update(id, product);
     }
 
