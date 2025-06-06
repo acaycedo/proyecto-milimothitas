@@ -3,8 +3,10 @@ package com.milimothitas.proyecto.proyecto_milimothitas.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+
 @Schema(description = "Respuesta de la información de los usuarios")
 @Data
+//Patron Builder - Gracias a lombok optimizamos y reduciomos codigo Boilerplate o repetivivo
 public class UserResponse {
     @Schema(description = "Identificador unico del usuario automatico", example = "1")
     private Long userId;
@@ -18,6 +20,5 @@ public class UserResponse {
     private String role;
     @Schema(description = "Estado del usuario, si es activo o inactivo, automatico", example = "Por Defecto: Active")
     private String state;
-    
-    
+
 }

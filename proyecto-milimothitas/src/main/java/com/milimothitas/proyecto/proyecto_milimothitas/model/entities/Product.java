@@ -22,12 +22,10 @@ public class Product {
 
     @Column(name = "code", nullable = false)
     private String name;
-
-    @Column(name = "categoria", nullable = false, unique = true)
-    private String categoria;
-
     @Column(name = "description", nullable = false)
     private String description;
+    @Column(name = "categoria", nullable = false, unique = true)
+    private String category;
 
     @Column(name = "price", nullable = false)
     private Double price;

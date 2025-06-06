@@ -4,14 +4,15 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import io.swagger.v3.oas.annotations.media.Schema;
-@Schema(description = "Solicitud de la información de los usuarios")
 
+@Schema(description = "Solicitud de la información de los usuarios")
+//Patron Builder - Gracias a lombok optimizamos y reduciomos codigo Boilerplate o repetivivo
 @Data
-//Clase usada para recibir los datos de un usuario
+// Clase usada para recibir los datos de un usuario
 public class UserRequest {
     @Schema(description = "Nombre del usuario", example = "Nombre Apellido")
     @NotBlank(message = "El campo Nombre es obligatiorio")
-    @Size(min=3, message = "El campo Name debe tener minimo 3 caracteres")
+    @Size(min = 3, message = "El campo Name debe tener minimo 3 caracteres")
     private String name;
     @Schema(description = "Correo único del usuario", example = "usuario@correo.com")
     @NotBlank(message = "El campo Email es obligatiorio")
