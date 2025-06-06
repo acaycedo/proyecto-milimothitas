@@ -13,7 +13,6 @@ import com.milimothitas.proyecto.proyecto_milimothitas.repositories.UserReposito
 import com.milimothitas.proyecto.proyecto_milimothitas.services.UserService;
 
 import lombok.RequiredArgsConstructor;
-import lombok.var;
 
 //Es mejor tener varias interfaces pequeñas que implementan todo lo necesario que una completa que implementa cosas que no se usan
 //Por ende cada interfaz debe tener un proposito, y no debemos forzar a clases a implementar metodos que no necesitan. Y recordemos que tenemos dos roles los cuales uno se rige de no tener las mismas caracteristicas que el otro.
@@ -52,32 +51,33 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse getById(Long id) {
-       return userRepository.findById(id)
-       .map(this::toResponse).orElseThrow(()-> new UserNotFoundException("No se ha encontrado el usuario"));
+        return userRepository.findById(id)
+                .map(this::toResponse)
+                .orElseThrow(() -> new UserNotFoundException("No se ha encontrado el usuario"));
     }
 
     @Override
     public List<UserResponse> getByName(String name) {
         return userRepository.findByNameIgnoringCaseContains(name).stream()
-       .map(this::toResponse).toList();
+                .map(this::toResponse).toList();
     }
 
     @Override
     public UserResponse create(UserRequest user) {
-        var entity = toEntity(user);
-        var newUser = userRepository.save(entity);
+        User entity = toEntity(user);
+        User newUser = userRepository.save(entity);
         return toResponse(newUser);
     }
 
     @Override
     public UserResponse update(Long id, UserRequest user) {
-        var entityOptional = userRepository.findById(id);
+        java.util.Optional<User> entityOptional = userRepository.findById(id);
         if (!entityOptional.isPresent()) {
             throw new UserNotFoundException("No se encontró el usuario");
         }
-        var entity = toEntity(user);
+        User entity = toEntity(user);
         entity.setId(entityOptional.get().getId());
-        var updatedEntity = userRepository.save(entity);
+        User updatedEntity = userRepository.save(entity);
 
         return toResponse(updatedEntity);
     }
@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
 
     // Metodo privado usado solo para traer los campos de la respuesta.
     private UserResponse toResponse(User user) {
-        var response = new UserResponse();
+        UserResponse response = new UserResponse();
         response.setUserId(user.getId());
         response.setName(user.getName());
         response.setEmail(user.getEmail());
@@ -98,9 +98,9 @@ public class UserServiceImpl implements UserService {
 
         return response;
     }
-
+    // Metodo privado usado solo para traer los campos del request.
     private User toEntity(UserRequest user){
-        var entity = new User();
+        User entity = new User();
         entity.setName(user.getName());
         entity.setEmail(user.getEmail());
         entity.setPassword(user.getPassword());
