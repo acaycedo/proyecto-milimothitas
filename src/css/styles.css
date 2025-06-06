@@ -1,0 +1,96 @@
+/* Estilos generales */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Estilos del sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 48px 0 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+    padding: 0.5rem 1rem;
+    margin: 0.2rem 0;
+}
+
+.sidebar .nav-link:hover {
+    color: #007bff;
+}
+
+.sidebar .nav-link.active {
+    color: #007bff;
+    background-color: #f8f9fa;
+}
+
+.sidebar .nav-link i {
+    margin-right: 0.5rem;
+}
+
+/* Estilos del contenido principal */
+main {
+    padding-top: 1.5rem;
+}
+
+/* Estilos de las tablas */
+.table-responsive {
+    margin-top: 1rem;
+}
+
+.table th {
+    background-color: #f8f9fa;
+}
+
+/* Estilos de los botones de acción */
+.btn-sm {
+    margin: 0 0.2rem;
+}
+
+/* Estilos del modal */
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.modal-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Estilos para los formularios */
+.form-label {
+    font-weight: 500;
+}
+
+/* Estilos para las alertas */
+#alert-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1050;
+}
+
+.alert {
+    margin-bottom: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/* Ajustes responsivos */
+@media (max-width: 767.98px) {
+    .sidebar {
+        position: static;
+        height: auto;
+        padding-top: 0;
+    }
+    
+    main {
+        margin-left: 0 !important;
+    }
+} 
