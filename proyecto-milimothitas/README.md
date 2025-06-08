@@ -25,7 +25,7 @@ Si vas a usar PostgreSQL, sigue estos pasos:
 
 *   **Crear una Base de Datos:** Abre tu cliente de PostgreSQL (por ejemplo, pgAdmin o psql) y crea una nueva base de datos, por ejemplo:
     ```sql
-    CREATE DATABASE milimothitas_db;
+    CREATE DATABASE milimothitasdb;
     ```
 *   **Actualizar Credenciales:**
     *   Asegúrate de que el archivo `src/main/resources/application.properties` (o `application.yml`) en tu proyecto tenga las credenciales correctas para tu base de datos PostgreSQL.
