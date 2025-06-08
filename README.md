@@ -191,42 +191,12 @@ CREATE TABLE sale_items (
 );
 ```
 
-## 🔒 Seguridad
-- Autenticación JWT
-- Roles de usuario (ADMIN, USER)
-- Validación de datos
-- Manejo de excepciones
-
-## 📈 Monitoreo y Logging
-- Logging con SLF4J
-- Monitoreo de endpoints
-- Trazabilidad de operaciones
-
-## 🤝 Contribución
-1. Fork el proyecto
-2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abrir un Pull Request
 
 ## 📄 Licencia
 Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para más detalles.
 
-## 👥 Autores
-- Tu Nombre - [@tu-usuario](https://github.com/tu-usuario)
-
-## 🙏 Agradecimientos
-- Spring Boot Team
-- Bootstrap Team
-- Comunidad de desarrolladores
-
-## 📞 Soporte
-Para soporte, email tu@email.com o crear un issue en el repositorio.
 
 ## 🔄 Actualizaciones Futuras
-- [ ] Implementación de gráficos en tiempo real
-- [ ] Sistema de notificaciones
-- [ ] App móvil
 - [ ] Integración con pasarelas de pago
 
    
