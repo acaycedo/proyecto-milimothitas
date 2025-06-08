@@ -116,6 +116,11 @@ const buscarProducto = async (query) => {
 
 const crearVenta = async () => {
     try {
+        if (!currentSale.saleItems || currentSale.saleItems.length === 0) {
+            showAlert('Debe agregar al menos un producto a la venta', 'warning');
+            return;
+        }
+
         const saleItemsForRequest = currentSale.saleItems.map(item => ({
             productId: item.product.id,
             quantity: item.quantity
@@ -123,18 +128,19 @@ const crearVenta = async () => {
 
         const ventaData = {
             saleItems: saleItemsForRequest,
-            descuento: currentSale.descuento
+            descuento: currentSale.descuento || 0
         };
 
-        const response = await axios.post(`${API_URL}/api/sales`, ventaData);
+        console.log('Enviando datos de venta:', ventaData);
+        const response = await axiosInstance.post('/api/sales', ventaData);
         const venta = response.data;
         console.log('Venta creada:', venta);
 
-        showAlert('Detalle de Venta ID: ' + venta.id + ' - Total: ' + formatCurrency(venta.totalConIva), 'info');
+        showAlert('Venta guardada exitosamente. ID: ' + venta.id + ' - Total: ' + formatCurrency(venta.totalConIva), 'success');
 
         // Actualizar la lista de productos para reflejar el nuevo stock
-        if (typeof cargarProductos === 'function') {
-            await cargarProductos();
+        if (typeof loadProducts === 'function') {
+            await loadProducts();
         }
 
         // Reiniciar el formulario de venta actual después de guardar
@@ -146,13 +152,26 @@ const crearVenta = async () => {
         document.getElementById('current-sale-products-table-body').innerHTML = '';
         document.getElementById('current-sale-total').textContent = formatCurrency(0);
         document.getElementById('descuento-input').value = 0;
+
+        // Recargar la lista de ventas si estamos en la sección de reportes
+        if (currentPage === 'reportes') {
+            await cargarVentas();
+        }
     } catch (error) {
         console.error('Error al crear la venta:', error);
-        if (error.response && error.response.data) {
-            showAlert(error.response.data, 'danger');
-        } else {
-            showAlert('Error al crear la venta', 'danger');
+        let errorMessage = 'Error al crear la venta';
+        if (error.response) {
+            if (error.response.data) {
+                errorMessage = error.response.data;
+            } else if (error.response.status === 400) {
+                errorMessage = 'Datos de venta inválidos';
+            } else if (error.response.status === 404) {
+                errorMessage = 'Producto no encontrado';
+            } else if (error.response.status === 409) {
+                errorMessage = 'Stock insuficiente para uno o más productos';
+            }
         }
+        showAlert(errorMessage, 'danger');
     }
 };
 

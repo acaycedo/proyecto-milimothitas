@@ -604,6 +604,33 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Evento para el botón de añadir producto a la venta
+    const addProductButton = document.getElementById('add-product-to-sale');
+    if (addProductButton) {
+        addProductButton.addEventListener('click', addProductToCurrentSale);
+    }
+
+    // Evento para el botón de guardar venta
+    const saveSaleButton = document.getElementById('saveSaleButton');
+    if (saveSaleButton) {
+        saveSaleButton.addEventListener('click', async () => {
+            try {
+                if (currentSale.saleItems.length === 0) {
+                    showAlert('Debe agregar al menos un producto a la venta', 'warning');
+                    return;
+                }
+
+                const descuento = parseFloat(document.getElementById('descuento-input').value) || 0;
+                currentSale.descuento = descuento;
+
+                await crearVenta();
+            } catch (error) {
+                console.error('Error al guardar la venta:', error);
+                showAlert('Error al guardar la venta: ' + (error.response?.data || error.message), 'danger');
+            }
+        });
+    }
 });
 
 // Función para cargar el resumen de ventas por mes
