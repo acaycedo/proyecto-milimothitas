@@ -21,7 +21,14 @@ Desarrollo</a></h1>
 ### ESTRUCTURA 📂
 
 # 🏪 Milimothitas - Sistema de Gestión de Ventas
-
+Manual Tecnico:
+```
+  https://docs.google.com/document/d/1XoIpv13tFjzWQfctSFzpMuftk-t11yqwlrMJIzNU2B0/edit?usp=sharing
+```
+Pruebas:
+```
+  https://docs.google.com/spreadsheets/d/1D6bLa1fy18Wj64D2IUsprGvGBnr4TwDBgFq3LTKHIgA/edit?usp=sharing
+```
 ## 📋 Descripción
 Sistema de gestión de ventas desarrollado con Spring Boot y JavaScript vanilla, que permite administrar productos, realizar ventas y generar reportes.
 
