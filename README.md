@@ -93,7 +93,6 @@ proyecto-milimothitas/
 - Java 17 o superior
 - Maven
 - PostgreSQL
-- Node.js (opcional para desarrollo frontend)
 
 ### Pasos de Instalación
 1. Clonar el repositorio
@@ -103,12 +102,12 @@ git clone https://github.com/tu-usuario/proyecto-milimothitas.git
 
 2. Configurar la base de datos
 ```sql
-CREATE DATABASE milimothitas;
+CREATE DATABASE milimothitasdb;
 ```
 
 3. Configurar application.properties
 ```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/milimothitas
+spring.datasource.url=jdbc:postgresql://localhost:5432/milimothitasdb
 spring.datasource.username=tu_usuario
 spring.datasource.password=tu_password
 ```
