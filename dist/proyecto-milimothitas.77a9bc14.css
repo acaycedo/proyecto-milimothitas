@@ -1,35 +1,32 @@
 body {
-  font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Alata, Arial, sans-serif;
+  font-weight: 400;
 }
 
 .sidebar {
   z-index: 100;
+  color: #fff;
   padding: 48px 0 0;
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   box-shadow: inset -1px 0 #0000001a;
+  background-color: #88617b !important;
 }
 
-.sidebar .nav-link {
-  color: #333;
-  margin: .2rem 0;
-  padding: .5rem 1rem;
-  font-weight: 500;
+.sidebar .nav-link, .sidebar h4 {
+  font-family: Alata, Arial, sans-serif;
+  color: #fff !important;
 }
 
-.sidebar .nav-link:hover {
-  color: #007bff;
-}
-
-.sidebar .nav-link.active {
-  color: #007bff;
-  background-color: #f8f9fa;
+.sidebar .nav-link.active, .sidebar .nav-link:focus, .sidebar .nav-link:hover {
+  background-color: #fff2;
+  color: #fff !important;
 }
 
 .sidebar .nav-link i {
-  margin-right: .5rem;
+  color: #fff !important;
 }
 
 main {
@@ -40,8 +37,8 @@ main {
   margin-top: 1rem;
 }
 
-.table th {
-  background-color: #f8f9fa;
+.table th, .table td {
+  font-weight: 400 !important;
 }
 
 .btn-sm {
@@ -84,5 +81,11 @@ main {
   main {
     margin-left: 0 !important;
   }
+}
+
+.sidebar-separator {
+  border: none;
+  border-top: 2px solid #ffffff4d;
+  margin: 0 1.5rem 1.5rem;
 }
 /*# sourceMappingURL=proyecto-milimothitas.77a9bc14.css.map */

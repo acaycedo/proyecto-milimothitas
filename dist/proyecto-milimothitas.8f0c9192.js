@@ -1,5 +1,5 @@
 // Variables globales
-let currentPage = 'products';
+let currentPage = 'catalogo';
 let products = [];
 let users = [];
 let currentItem = null;
@@ -109,12 +109,14 @@ const showModal = (title, item = null)=>{
     }
     currentItem = item;
     const modalTitle = document.getElementById('modalTitle');
+    const saveButton = document.getElementById('saveButton');
     const productFields = document.getElementById('product-fields');
     const userFields = document.getElementById('user-fields');
     const form = document.getElementById('dataForm');
-    if (modalTitle) modalTitle.textContent = title;
     if (form) form.reset();
-    if (currentPage === 'products') {
+    if (currentPage === 'catalogo') {
+        if (modalTitle) modalTitle.textContent = title.includes('Editar') ? 'Editar Producto' : 'Nuevo Producto';
+        if (saveButton) saveButton.textContent = item ? 'Actualizar Producto' : 'Guardar Producto';
         if (productFields) productFields.style.display = 'block';
         if (userFields) userFields.style.display = 'none';
         if (item) {
@@ -124,7 +126,9 @@ const showModal = (title, item = null)=>{
             document.getElementById('price').value = item.price || '';
             document.getElementById('stock').value = item.stock || '';
         }
-    } else {
+    } else if (currentPage === 'embajadoras') {
+        if (modalTitle) modalTitle.textContent = title.includes('Editar') ? 'Editar Embajadora' : 'Nueva Embajadora';
+        if (saveButton) saveButton.textContent = item ? 'Actualizar Embajadora' : 'Guardar Embajadora';
         if (productFields) productFields.style.display = 'none';
         if (userFields) userFields.style.display = 'block';
         if (item) {
@@ -157,19 +161,20 @@ const renderProducts = ()=>{
     }
     tbody.innerHTML = products.map((product)=>`
         <tr>
-            <td>${product.id}</td>
+            <td>${product.category || ''}</td>
             <td>${product.code || ''}</td>
             <td>${product.description || ''}</td>
-            <td>${product.category || ''}</td>
-            <td>${formatPriceCOP(product.price)}</td>
             <td>${product.stock || 0}</td>
+            <td>${formatPriceCOP(product.price)}</td>
             <td>${product.state ? 'Activo' : 'Inactivo'}</td>
             <td>
-                <button class="btn btn-sm btn-warning" onclick="editProduct(${product.id})">
-                    <i class="bi bi-pencil"></i>
+                <button class="btn btn-sm btn-outline-primary" onclick="editProduct(${product.id})">
+                    <i class="bi bi-pencil-square"></i>
                 </button>
-                <button class="btn btn-sm btn-danger" onclick="deleteProduct(${product.id})">
-                    <i class="bi bi-trash"></i>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-secondary" onclick="deleteProduct(${product.id})">
+                    <i class="bi bi-x"></i> Cancelar
                 </button>
             </td>
         </tr>
@@ -202,11 +207,13 @@ const renderUsers = ()=>{
             <td>${user.role || 'USER'}</td>
             <td>${user.state || 'Active'}</td>
             <td>
-                <button class="btn btn-sm btn-warning" onclick="editUser(${user.userId})">
-                    <i class="bi bi-pencil"></i>
+                <button class="btn btn-sm btn-outline-primary" onclick="editUser(${user.userId})">
+                    <i class="bi bi-pencil-square"></i>
                 </button>
-                <button class="btn btn-sm btn-danger" onclick="deleteUser(${user.userId})">
-                    <i class="bi bi-trash"></i>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-secondary" onclick="deleteUser(${user.userId})">
+                    <i class="bi bi-x"></i> Eliminar
                 </button>
             </td>
         </tr>
@@ -256,14 +263,14 @@ const showSection = (section)=>{
         else link.classList.remove('active');
     });
     // Cargar datos según la sección
-    if (section === 'products') loadProducts();
-    else if (section === 'users') loadUsers();
+    if (section === 'catalogo') loadProducts();
+    else if (section === 'embajadoras') loadUsers();
 };
 // Función para validar el formulario
 const validateForm = ()=>{
     const form = document.getElementById('dataForm');
     if (!form) return false;
-    if (currentPage === 'products') {
+    if (currentPage === 'catalogo') {
         const code = document.getElementById('code').value;
         const description = document.getElementById('description').value;
         const category = document.getElementById('category').value;
@@ -301,7 +308,54 @@ const validateForm = ()=>{
     }
     return true;
 };
-// Inicialización
+// Funciones de búsqueda para productos
+const searchProductsByCode = async (code)=>{
+    try {
+        const response = await axiosInstance.get(`/api/products/search?codigo=${encodeURIComponent(code)}`);
+        products = response.data;
+        renderProducts();
+    } catch (error) {
+        showError("Error al buscar productos por c\xf3digo", error);
+    }
+};
+const searchProductsByName = async (name)=>{
+    try {
+        const response = await axiosInstance.get(`/api/products/search?nombre=${encodeURIComponent(name)}`);
+        products = response.data;
+        renderProducts();
+    } catch (error) {
+        showError('Error al buscar productos por nombre', error);
+    }
+};
+const searchProductsByCategory = async (category)=>{
+    try {
+        const response = await axiosInstance.get(`/api/products/search?categoria=${encodeURIComponent(category)}`);
+        products = response.data;
+        renderProducts();
+    } catch (error) {
+        showError("Error al buscar productos por categor\xeda", error);
+    }
+};
+// Funciones de búsqueda para usuarios
+const searchUsersByName = async (name)=>{
+    try {
+        const response = await axiosInstance.get(`/api/users/search?nombre=${encodeURIComponent(name)}`);
+        users = response.data;
+        renderUsers();
+    } catch (error) {
+        showError('Error al buscar usuarios por nombre', error);
+    }
+};
+const searchUsersByEmail = async (email)=>{
+    try {
+        const response = await axiosInstance.get(`/api/users/search?email=${encodeURIComponent(email)}`);
+        users = response.data;
+        renderUsers();
+    } catch (error) {
+        showError('Error al buscar usuarios por email', error);
+    }
+};
+// Event Listeners para los campos de búsqueda
 document.addEventListener('DOMContentLoaded', ()=>{
     console.log("Inicializando aplicaci\xf3n...");
     // Inicializar el modal
@@ -325,7 +379,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         if (!validateForm()) return;
         let formData;
         try {
-            if (currentPage === 'products') formData = {
+            if (currentPage === 'catalogo') formData = {
                 code: document.getElementById('code').value,
                 description: document.getElementById('description').value,
                 category: document.getElementById('category').value,
@@ -345,7 +399,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             }
             if (currentItem) {
                 // Actualizar
-                if (currentPage === 'products') {
+                if (currentPage === 'catalogo') {
                     await axiosInstance.put(`/api/products/${currentItem.id}`, formData);
                     showAlert('Producto actualizado exitosamente');
                     await loadProducts();
@@ -355,7 +409,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     await loadUsers();
                 }
             } else // Crear
-            if (currentPage === 'products') {
+            if (currentPage === 'catalogo') {
                 await axiosInstance.post('/api/products', formData);
                 showAlert('Producto creado exitosamente');
                 await loadProducts();
@@ -372,7 +426,49 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
     });
     // Cargar datos iniciales
-    showSection('products');
+    showSection('catalogo');
+    // Búsqueda de productos
+    const productSearchInput = document.getElementById('product-search');
+    if (productSearchInput) productSearchInput.addEventListener('input', (e)=>{
+        const searchTerm = e.target.value.trim();
+        if (searchTerm) searchProductsByName(searchTerm);
+        else loadProducts();
+    });
+    const productCodeSearchInput = document.getElementById('product-code-search');
+    if (productCodeSearchInput) productCodeSearchInput.addEventListener('input', (e)=>{
+        const searchTerm = e.target.value.trim();
+        if (searchTerm) searchProductsByCode(searchTerm);
+        else loadProducts();
+    });
+    const productCategorySearchInput = document.getElementById('product-category-search');
+    if (productCategorySearchInput) productCategorySearchInput.addEventListener('input', (e)=>{
+        const searchTerm = e.target.value.trim();
+        if (searchTerm) searchProductsByCategory(searchTerm);
+        else loadProducts();
+    });
+    // Búsqueda de usuarios
+    const userSearchInput = document.getElementById('user-search');
+    if (userSearchInput) userSearchInput.addEventListener('input', (e)=>{
+        const searchTerm = e.target.value.trim();
+        if (searchTerm) searchUsersByName(searchTerm);
+        else loadUsers();
+    });
+    const userEmailSearchInput = document.getElementById('user-email-search');
+    if (userEmailSearchInput) userEmailSearchInput.addEventListener('input', (e)=>{
+        const searchTerm = e.target.value.trim();
+        if (searchTerm) searchUsersByEmail(searchTerm);
+        else loadUsers();
+    });
+    // Botón Registrar Producto en Catálogo
+    const registerProductBtn = document.getElementById('register-product-btn');
+    if (registerProductBtn) registerProductBtn.addEventListener('click', ()=>{
+        if (currentPage === 'catalogo') showModal('Nuevo Producto');
+    });
+    // Botón Registrar Embajadora en Embajadoras
+    const registerUserBtn = document.getElementById('register-user-btn');
+    if (registerUserBtn) registerUserBtn.addEventListener('click', ()=>{
+        if (currentPage === 'embajadoras') showModal('Nueva Embajadora');
+    });
 });
 
 //# sourceMappingURL=proyecto-milimothitas.8f0c9192.js.map

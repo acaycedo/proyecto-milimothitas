@@ -1,0 +1,102 @@
+/* Estilos generales */
+body {
+    font-family: 'Alata', Arial, sans-serif;
+    font-weight: 400;
+}
+
+/* Estilos del sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 48px 0 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    background-color: #88617B !important;
+    color: #fff;
+}
+
+.sidebar .nav-link,
+.sidebar h4 {
+    color: #fff !important;
+    font-family: 'Alata', Arial, sans-serif;
+}
+
+.sidebar .nav-link.active,
+.sidebar .nav-link:focus,
+.sidebar .nav-link:hover {
+    background-color: #fff2;
+    color: #fff !important;
+}
+
+.sidebar .nav-link i {
+    color: #fff !important;
+}
+
+/* Estilos del contenido principal */
+main {
+    padding-top: 1.5rem;
+}
+
+/* Estilos de las tablas */
+.table-responsive {
+    margin-top: 1rem;
+}
+
+.table th, .table td {
+    font-weight: 400 !important;
+}
+
+/* Estilos de los botones de acción */
+.btn-sm {
+    margin: 0 0.2rem;
+}
+
+/* Estilos del modal */
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.modal-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Estilos para los formularios */
+.form-label {
+    font-weight: 500;
+}
+
+/* Estilos para las alertas */
+.alert-container {
+    position: sticky;
+    top: 1rem;
+    z-index: 1050;
+    margin-bottom: 1rem;
+}
+
+.alert {
+    margin-bottom: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/* Ajustes responsivos */
+@media (max-width: 767.98px) {
+    .sidebar {
+        position: static;
+        height: auto;
+        padding-top: 0;
+    }
+    
+    main {
+        margin-left: 0 !important;
+    }
+}
+
+.sidebar-separator {
+    border: none;
+    border-top: 2px solid rgba(255,255,255,0.3);
+    margin: 0 1.5rem 1.5rem 1.5rem;
+} 
