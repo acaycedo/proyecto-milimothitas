@@ -11,7 +11,7 @@ Desarrollo</a></h1>
 </a>
 
 
-- El desafío consistirá en desarrollar un programa centralizado en un modulo de clientes el cual se centrará en un software escalable, lo cual facilitará la implementación de nuevos módulos y funcionalidades conforme la empresa crezca. Esto reducirá el riesgo de cancelación o bajo interés una vez se empiecen a ver resultados positivos. Para asegurar la escalabilidad y flexibilidad del sistema, el equipo adoptará diversas estrategias enfocadas en el desarrollo.
+- El desafío consistirá en desarrollar un programa centralizado en un módulo de ventas para la empresa Milimothitas el cual se centrará en un software escalable, lo cual facilitará la implementación de nuevos módulos y funcionalidades conforme la empresa crezca. Esto reducirá el riesgo de cancelación o bajo interés una vez se empiecen a ver resultados positivos. Además de asegurar una simplificación de todos los procesos que se llevan a cabo dentro de la empresa como las funciones de las embajadoras y de igual forma asegurar la escalabilidad y flexibilidad del sistema, el equipo adoptará diversas estrategias enfocadas en el desarrollo.
 - 📝 Video de Presentación [Youtube](En Un Futuro)
 <br/>
 
