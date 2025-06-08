@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 import com.milimothitas.proyecto.proyecto_milimothitas.services.ProductService;
 import com.milimothitas.proyecto.proyecto_milimothitas.exceptions.ProductNotFoundException;
+import com.milimothitas.proyecto.proyecto_milimothitas.exceptions.ProductInUseException;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -5,89 +5,113 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="/proyecto-milimothitas.77a9bc14.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&amp;display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
-                <div class="position-sticky pt-3">
-                    <h4 class="text-center mb-4">Milimothitas</h4>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#" data-section="products">
-                                <i class="bi bi-box"></i> Productos
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-section="users">
-                                <i class="bi bi-people"></i> Usuarios
-                            </a>
-                        </li>
-                    </ul>
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar p-0">
+                <div class="position-sticky pt-3 d-flex flex-column h-100" style="min-height: 100vh">
+                    <h4 class="text-center mt-3 mb-1">Milimothitas</h4>
+                    <div class="text-center mb-3" style="color: #fff9; font-size: .95rem">Bienvenid@s</div>
+                    <hr class="sidebar-separator">
+                    <div class="px-3">
+                        <div class="fw-bold text-uppercase small mb-2 mt-2">Área de Trabajo</div>
+                        <ul class="nav flex-column mb-2">
+                            <li class="nav-item"><a class="nav-link" href="#" data-section="dashboard"><i class="bi bi-house"></i> Dashboard</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" data-section="ventas"><i class="bi bi-cart"></i> Ventas</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="#" data-section="catalogo"><i class="bi bi-archive"></i> Catálogo</a></li>
+                        </ul>
+                        <div class="fw-bold text-uppercase small mb-2 mt-4">Administración</div>
+                        <ul class="nav flex-column mb-2">
+                            <li class="nav-item"><a class="nav-link" href="#" data-section="reportes"><i class="bi bi-bar-chart"></i> Reportes</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" data-section="embajadoras"><i class="bi bi-people"></i> Embajadoras</a></li>
+                        </ul>
+                        <div class="fw-bold text-uppercase small mb-2 mt-4">Gestión</div>
+                        <ul class="nav flex-column mb-2">
+                            <li class="nav-item"><a class="nav-link" href="#" data-section="usuario"><i class="bi bi-person"></i> Usuario</a></li>
+                        </ul>
+                    </div>
                 </div>
             </nav>
-
             <!-- Contenido principal -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div id="alert-container"></div>
-
-                <!-- Sección de Productos -->
-                <div id="products-section" class="section">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h2>Productos</h2>
-                        <button class="btn btn-primary" onclick="showModal('Nuevo Producto')">
-                            <i class="bi bi-plus"></i> Nuevo Producto
-                        </button>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 bg-light" style="min-height: 100vh">
+                <!-- Sección Catálogo (Productos) -->
+                <div id="catalogo-section" class="section">
+                    <h2 class="mb-3">Catálogo</h2>
+                    <!-- Buscador y botón agregar -->
+                    <div class="bg-white rounded shadow-sm p-3 my-3">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-md-12">
+                                <input type="text" class="form-control form-control-lg" id="product-code-search" placeholder="Ingrese Código del producto">
+                            </div>
+                        </div>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Código</th>
-                                    <th>Descripción</th>
-                                    <th>Categoría</th>
-                                    <th>Precio</th>
-                                    <th>Stock</th>
-                                    <th>Estado</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="products-table-body"></tbody>
-                        </table>
+                    <!-- Tabla de productos -->
+                    <div class="bg-white rounded shadow-sm p-3">
+                        <div class="table-responsive">
+                            <table class="table align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th><i class="bi bi-tags"></i> Categoría</th>
+                                        <th><i class="bi bi-upc"></i> Código</th>
+                                        <th>Producto</th>
+                                        <th><i class="bi bi-brightness-high"></i> Cantidad</th>
+                                        <th><i class="bi bi-star"></i> Precio Und</th>
+                                        <th><i class="bi bi-check-circle"></i> Estado</th>
+                                        <th>Editar</th>
+                                        <th><i class="bi bi-circle"></i> Eliminar</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="products-table-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- Botón registrar producto -->
+                    <div class="d-flex justify-content-end mt-4">
+                        <button class="btn" id="register-product-btn" style="color: #fff; background: #88617b; min-width: 200px; font-size: 1.1rem">Registrar Producto</button>
                     </div>
                 </div>
-
-                <!-- Sección de Usuarios -->
-                <div id="users-section" class="section" style="display: none">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h2>Usuarios</h2>
-                        <button class="btn btn-primary" onclick="showModal('Nuevo Usuario')">
-                            <i class="bi bi-plus"></i> Nuevo Usuario
-                        </button>
+                <!-- Sección Embajadoras (Usuarios) -->
+                <div id="embajadoras-section" class="section" style="display: none">
+                    <h2 class="mb-3">Embajadoras</h2>
+                    <!-- Buscador y botón agregar -->
+                    <div class="bg-white rounded shadow-sm p-3 my-3">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-md-12">
+                                <input type="text" class="form-control form-control-lg" id="user-search" placeholder="Buscar por nombre o email...">
+                            </div>
+                        </div>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>
-                                    <th>Email</th>
-                                    <th>Rol</th>
-                                    <th>Estado</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="users-table-body"></tbody>
-                        </table>
+                    <!-- Tabla de embajadoras -->
+                    <div class="bg-white rounded shadow-sm p-3">
+                        <div class="table-responsive">
+                            <table class="table align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Email</th>
+                                        <th>Rol</th>
+                                        <th>Estado</th>
+                                        <th>Editar</th>
+                                        <th>Eliminar</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="users-table-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- Botón registrar embajadora -->
+                    <div class="d-flex justify-content-end mt-4">
+                        <button class="btn" id="register-user-btn" style="color: #fff; background: #88617b; min-width: 200px; font-size: 1.1rem">Registrar Embajadora</button>
                     </div>
                 </div>
             </main>
         </div>
     </div>
-
-    <!-- Modal -->
+    <!-- Modal y scripts originales se mantienen igual -->
     <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -151,7 +175,6 @@
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/proyecto-milimothitas.8f0c9192.js"></script>

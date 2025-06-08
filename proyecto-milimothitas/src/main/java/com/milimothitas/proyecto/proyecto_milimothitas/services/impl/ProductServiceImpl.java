@@ -3,12 +3,15 @@ package com.milimothitas.proyecto.proyecto_milimothitas.services.impl;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.milimothitas.proyecto.proyecto_milimothitas.exceptions.ProductNotFoundException;
+import com.milimothitas.proyecto.proyecto_milimothitas.exceptions.ProductInUseException;
 import com.milimothitas.proyecto.proyecto_milimothitas.model.dto.ProductRequest;
 import com.milimothitas.proyecto.proyecto_milimothitas.model.dto.ProductResponse;
 import com.milimothitas.proyecto.proyecto_milimothitas.model.entities.Product;
 import com.milimothitas.proyecto.proyecto_milimothitas.repositories.ProductRepository;
+import com.milimothitas.proyecto.proyecto_milimothitas.repositories.SaleItemRepository;
 import com.milimothitas.proyecto.proyecto_milimothitas.services.ProductService;
 
 import lombok.RequiredArgsConstructor;
@@ -18,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+    private final SaleItemRepository saleItemRepository;
 
     @Override
     public List<ProductResponse> getAll() {
@@ -63,8 +67,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
-        productRepository.deleteById(id);
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException("No se ha encontrado el producto"));
+        productRepository.delete(product);
     }
     //metodo refactorizado para no tener que repetir esta misma linea en cada metodo y asi ahorrarnos
     //el tema de estar seteando los objetos del Response
