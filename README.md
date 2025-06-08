@@ -22,7 +22,7 @@ Desarrollo</a></h1>
 
 # 🏪 Milimothitas - Sistema de Gestión de Ventas
 Video de instalación
-Mil disculpas por no poder realizar el despliegue tratamos lo mostrarmos en el video pero no encontramos el error de porque no ejecuta.
+- Mil disculpas por no poder realizar el despliegue tratamos lo mostrarmos en el video pero no encontramos el error de porque no ejecuta.
 ```
 https://youtu.be/0HTtN5ZX2T0
 ```
