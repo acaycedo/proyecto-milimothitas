@@ -21,6 +21,10 @@ Desarrollo</a></h1>
 ### ESTRUCTURA 📂
 
 # 🏪 Milimothitas - Sistema de Gestión de Ventas
+Video de instalación
+```
+https://youtu.be/0HTtN5ZX2T0
+```
 Manual Tecnico:
 ```
   https://docs.google.com/document/d/1XoIpv13tFjzWQfctSFzpMuftk-t11yqwlrMJIzNU2B0/edit?usp=sharing
@@ -110,12 +114,12 @@ spring.datasource.password=tu_password
 
 4. Compilar el proyecto
 ```bash
-mvn clean install
+./mvnw clean install
 ```
 
 5. Ejecutar la aplicación
 ```bash
-mvn spring-boot:run
+./mvnw spring-boot:run
 ```
 
 ## 📝 API Documentation
