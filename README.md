@@ -20,11 +20,214 @@ Desarrollo</a></h1>
 
 ### ESTRUCTURA 📂
 
-Es un proyecto con estructura basica se basara en Spring Boot Java y un Frontend en JS
+# 🏪 Milimothitas - Sistema de Gestión de Ventas
 
-- `src`: Es un directorio que contiene el código fuente del proyecto
-- `lib`: Contiene las librerías predefinidas
-- `bin` Contiene los diferentes archivos binarios que se obtienen de compilar el código
+## 📋 Descripción
+Sistema de gestión de ventas desarrollado con Spring Boot y JavaScript vanilla, que permite administrar productos, realizar ventas y generar reportes.
+
+## 🚀 Características Principales
+- Gestión de productos (CRUD)
+- Sistema de ventas
+- Control de inventario
+- Generación de reportes
+- Exportación a CSV
+- Interfaz responsiva
+
+## 🛠️ Tecnologías Utilizadas
+
+### Backend
+- Java 17
+- Spring Boot 3.x
+- Spring Data JPA
+- PostgreSQL
+- Maven
+
+### Frontend
+- JavaScript Vanilla
+- Bootstrap 5
+- Axios
+- Chart.js
+
+## 📦 Estructura del Proyecto
+```
+proyecto-milimothitas/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/milimothitas/proyecto/
+│   │   │       ├── controllers/
+│   │   │       ├── services/
+│   │   │       ├── repositories/
+│   │   │       ├── model/
+│   │   │       │   ├── entities/
+│   │   │       │   └── dto/
+│   │   │       └── exceptions/
+│   │   └── resources/
+│   │       ├── static/
+│   │       │   ├── css/
+│   │       │   ├── js/
+│   │       │   └── img/
+│   │       └── templates/
+│   └── test/
+│       └── java/
+│           └── com/milimothitas/proyecto/
+├── pom.xml
+└── README.md
+```
+
+## 🚀 Instalación
+
+### Requisitos Previos
+- Java 17 o superior
+- Maven
+- PostgreSQL
+- Node.js (opcional para desarrollo frontend)
+
+### Pasos de Instalación
+1. Clonar el repositorio
+```bash
+git clone https://github.com/tu-usuario/proyecto-milimothitas.git
+```
+
+2. Configurar la base de datos
+```sql
+CREATE DATABASE milimothitas;
+```
+
+3. Configurar application.properties
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/milimothitas
+spring.datasource.username=tu_usuario
+spring.datasource.password=tu_password
+```
+
+4. Compilar el proyecto
+```bash
+mvn clean install
+```
+
+5. Ejecutar la aplicación
+```bash
+mvn spring-boot:run
+```
+
+## 📝 API Documentation
+
+### Endpoints Principales
+
+#### Productos
+- `GET /api/products` - Listar productos
+- `POST /api/products` - Crear producto
+- `PUT /api/products/{id}` - Actualizar producto
+- `DELETE /api/products/{id}` - Eliminar producto
+
+#### Ventas
+- `GET /api/sales` - Listar ventas
+- `POST /api/sales` - Crear venta
+- `GET /api/sales/{id}` - Obtener venta por ID
+- `GET /api/sales/filter-by-date` - Filtrar ventas por fecha
+
+## 🧪 Pruebas
+
+### Herramientas de Pruebas
+- JUnit 5
+- Mockito
+- Spring Test
+- H2 Database (pruebas)
+- JaCoCo (cobertura)
+
+### Tipos de Pruebas
+1. **Pruebas Unitarias**
+   - Servicios
+   - Controladores
+   - Repositorios
+
+2. **Pruebas de Integración**
+   - Flujos completos
+   - API endpoints
+   - Base de datos
+
+3. **Pruebas de Usabilidad**
+   - Interfaz de usuario
+   - Navegación
+   - Formularios
+
+## 📊 Base de Datos
+
+### Modelo Entidad-Relación
+```
+[Product] 1---* [SaleItem] *---1 [Sale]
+```
+
+### Tablas Principales
+```sql
+CREATE TABLE products (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    code VARCHAR(255) NOT NULL UNIQUE,
+    description VARCHAR(255) NOT NULL,
+    categoria VARCHAR(255) NOT NULL,
+    price DOUBLE NOT NULL,
+    stock INTEGER NOT NULL,
+    state BOOLEAN NOT NULL
+);
+
+CREATE TABLE sales (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    fecha DATETIME NOT NULL,
+    subtotal DOUBLE NOT NULL,
+    iva DOUBLE NOT NULL,
+    total_con_iva DOUBLE NOT NULL,
+    descuento DOUBLE NOT NULL
+);
+
+CREATE TABLE sale_items (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    sale_id BIGINT NOT NULL,
+    product_id BIGINT NOT NULL,
+    quantity INTEGER NOT NULL,
+    price_at_sale DOUBLE NOT NULL,
+    FOREIGN KEY (sale_id) REFERENCES sales(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+```
+
+## 🔒 Seguridad
+- Autenticación JWT
+- Roles de usuario (ADMIN, USER)
+- Validación de datos
+- Manejo de excepciones
+
+## 📈 Monitoreo y Logging
+- Logging con SLF4J
+- Monitoreo de endpoints
+- Trazabilidad de operaciones
+
+## 🤝 Contribución
+1. Fork el proyecto
+2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abrir un Pull Request
+
+## 📄 Licencia
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para más detalles.
+
+## 👥 Autores
+- Tu Nombre - [@tu-usuario](https://github.com/tu-usuario)
+
+## 🙏 Agradecimientos
+- Spring Boot Team
+- Bootstrap Team
+- Comunidad de desarrolladores
+
+## 📞 Soporte
+Para soporte, email tu@email.com o crear un issue en el repositorio.
+
+## 🔄 Actualizaciones Futuras
+- [ ] Implementación de gráficos en tiempo real
+- [ ] Sistema de notificaciones
+- [ ] App móvil
+- [ ] Integración con pasarelas de pago
 
    
 ### INTEGRANTES UNIVERSIDAD IBEROAMERICANA
